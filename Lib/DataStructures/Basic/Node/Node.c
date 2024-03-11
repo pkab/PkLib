@@ -17,15 +17,16 @@ Node* NodeInit(void* data, uint8_t type, uint64_t size){
         case Char: dataSize = sizeof(char); break;
         case String: dataSize = sizeof(char) * size; break;
         case _bool: dataSize = sizeof(_Bool) * size; break;
-        case Signed8: dataSize = sizeof(i8) * size; break;
-        case Signed16: dataSize = sizeof(i16) * size; break;
-        case Signed32: dataSize = sizeof(i32) * size; break;
-        case Signed64: dataSize = sizeof(i64) * size; break;
-        case Unsigned8: dataSize = sizeof(u8) * size; break;
-        case Unsigned16: dataSize = sizeof(u16) * size; break;
-        case Unsigned32: dataSize = sizeof(u32) * size; break;
-        case Unsigned64: dataSize = sizeof(u64) * size; break;
+        case I8: dataSize = sizeof(i8) * size; break;
+        case I16: dataSize = sizeof(i16) * size; break;
+        case I32: dataSize = sizeof(i32) * size; break;
+        case I64: dataSize = sizeof(i64) * size; break;
+        case U8: dataSize = sizeof(u8) * size; break;
+        case U16: dataSize = sizeof(u16) * size; break;
+        case U32: dataSize = sizeof(u32) * size; break;
+        case U64: dataSize = sizeof(u64) * size; break;
         case _complex: dataSize = sizeof(_Complex) * size; break;
+        default: dataSize = size; break;
 
     }
     newNode->data = malloc(dataSize);
@@ -51,10 +52,10 @@ void NodeFree(Node* node){
 void NodePrint(Node* node){
     switch (node->type) {
         case Int:
-        case Signed8:
-        case Signed16:
-        case Signed32:
-        case Signed64:
+        case I8:
+        case I16:
+        case I32:
+        case I64:
             printf("Pointer: %p, Value: %ld, Type: %u, Size: %lu\n",node->data,*(int64_t*)node->data,node->type,node->size);
             break;
         case Float:

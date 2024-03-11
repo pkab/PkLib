@@ -2,9 +2,9 @@
 #define PKLIB_NODE_H
 #include <stdint.h>
 enum {
-    Int = 0, Float, Double, Char, String, _bool,Signed8,
-    Signed16, Signed32, Signed64, Unsigned8,
-    Unsigned16, Unsigned32, Unsigned64, _complex
+    Int = 0, Float, Double, Char, String, _bool,I8,
+    I16, I32, I64, U8,
+    U16, U32, U64, _complex
 };
 typedef int8_t i8;
 typedef int16_t i16;
