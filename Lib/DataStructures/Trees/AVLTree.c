@@ -2,6 +2,22 @@
 #include <stdio.h>
 #include <string.h>
 
+/* CORE AVL Tree Internal Comparison and Calculation Functions */
+int AVLHeight(TNode* N);
+int AVLBalance(TNode* N);
+int max(int a,int b);
+int AVLCompare(void* data1, void* data2, u8 type);
+/* Internal Node Operations Functions */
+TNode* AVLRotateRight(TNode* y);
+TNode* AVLRotateLeft(TNode* x);
+TNode* AVLRecusiveInsert(TNode* node, void* data, u8 type, u64 size);
+TNode* AVLRecursiveDelete(TNode* node, void* data, u8 type);
+void AVLFreeNode(TNode* node);
+TNode* AVLSearchNode(TNode* node, void* data, u8 type);
+/* Core AVL Display Functions */
+void AVLPreOrder(TNode* root);
+void AVLPostOrder(TNode* root);
+void AVLInOrder(TNode* root);
 /*
  * --------------------- CORE AVL Tree Functions START --------------------- *
  */
