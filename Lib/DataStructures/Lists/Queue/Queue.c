@@ -13,8 +13,8 @@ Node* QPeek(Queue* queue){
     return queue->list.head;
 }
 int isEmpty(Queue* queue){
-    if(queue->list.head) return 1;
-    return 0;
+    if(queue->list.head!=NULL) return 0;
+    return 1;
 }
 u64 isQNodes(Queue* queue){
     return queue->list.nodes;

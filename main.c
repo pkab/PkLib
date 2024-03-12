@@ -6,7 +6,7 @@ typedef struct Task{
 }task;
 void* add(void *args){
     struct Task* ar = (struct ar*)args;
-    printf("Add %d: %d\n",ar->a,ar->a+ar->b);
+    fprintf(stdout,"Add %d: %d\n",ar->a,ar->a+ar->b);
     return NULL;
 }
 int main() {
