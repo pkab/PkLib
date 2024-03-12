@@ -8,6 +8,9 @@ typedef struct qeue{
 } Queue;
 
 void QueueInit(Queue* queue);
+Node* QPeek(Queue* queue);
+int isEmpty(Queue* queue);
+u64 isQNodes(Queue* queue);
 void Enqueue(Queue* queue, void* data, u8 type, uint64_t size);
 void Dequeue(Queue* queue);
 void QueuePrint(Queue* queue);

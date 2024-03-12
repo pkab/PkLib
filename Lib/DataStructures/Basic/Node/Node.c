@@ -31,13 +31,15 @@ Node* NodeInit(void* data, uint8_t type, uint64_t size){
         default: break;
 
     }
+
     newNode->data = malloc(dataSize);
     if (newNode->data == NULL) {
         fprintf(stderr, "Memory allocation failed for Node data.\n");
         free(newNode);
         exit(EXIT_FAILURE);
     }
-    memcpy(newNode->data,data,dataSize);
+    memcpy(newNode->data, data, dataSize);
+
     newNode->type = type;
     newNode->size = size;
     newNode->next = NULL;
