@@ -26,7 +26,7 @@ void AVLInit(AVLTree* tree, u8 type, u64 size);
 void AVLInsert(AVLTree* tree, void* data);
 void AVLDelete(AVLTree* tree, void* data);
 void AVLPrint(AVLTree* tree, u8 order);
-void AVLSearch(AVLTree* tree, void* data);
+TNode* AVLSearch(AVLTree* tree, void* data);
 void AVLFree(AVLTree* tree);
 /* Core AVL Display Functions */
 void AVLPreOrder(TNode* root);

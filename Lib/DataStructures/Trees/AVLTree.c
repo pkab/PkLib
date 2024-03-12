@@ -35,11 +35,12 @@ void AVLPrint(AVLTree* tree, u8 order){
 }
 
 /* Search for Node in the AVL Tree */
-void AVLSearch(AVLTree* tree, void* data){
+TNode* AVLSearch(AVLTree* tree, void* data){
     TNode *node = AVLSearchNode(tree->root, data, tree->type);
     if(node) TNodePrint(node);
     else printf("Node not found");
     printf("\n");
+    return node;
 }
 
 /* Free the AVL Tree After Use */
