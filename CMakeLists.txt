@@ -12,5 +12,6 @@ set(SOURCES
         Lib/DataStructures/Lists/Stack/Stack.c
         Lib/DataStructures/Trees/BinarySearchTree.c
         Lib/DataStructures/Basic/Node/TreeNode.c
+        Lib/DataStructures/Trees/AVLTree.c
 )
 add_executable(${PROJECT_NAME} ${SOURCES})
