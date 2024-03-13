@@ -28,7 +28,7 @@ void PoolFree(TPool* pool){
         pthread_cond_broadcast(&pool->signal);
     }
     for(int i=0; i < pool->numThreads; i++){
-//        pthread_join(pool->pool[i], NULL);
+        pthread_join(pool->pool[i], NULL);
     }
     free(pool->pool);
     QueueFree(&pool->work);
@@ -44,6 +44,7 @@ void* threadJob(void* arg){
         pthread_mutex_lock(&pool->lock);
         while(!pool->stop && isEmpty(&pool->work))
             pthread_cond_wait(&pool->signal,&pool->lock);
+
         TJob task= *(TJob*)(QPeek(&pool->work)->data);
         Dequeue(&pool->work);
         pthread_mutex_unlock(&pool->lock);
