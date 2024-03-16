@@ -5,7 +5,6 @@
 #include <math.h>
 
 void MinHeapInit(MinHeap* heap, u8 type, u64 height){
-
     heap->height = height;
     heap->type = type;
     heap->size = 0;
