@@ -23,7 +23,7 @@ typedef struct NODE{
     void *data; /* void pointer for any Data */
     uint8_t type; /* void Data type */
     uint64_t size; /* Size */
-    int height;
+    int priority; /* To be used for Priority Queue */
     struct NODE* next; /* Next node prev */
     struct NODE* prev; /* previous node */
 }Node;
@@ -31,4 +31,6 @@ typedef struct NODE{
 Node* NodeInit(void* , uint8_t, uint64_t);
 void NodeFree(Node*);
 void NodePrint(Node*);
+void NodePriorityPrint(Node*);
+u64 retSizeType(Node*);
 #endif //PKLIB_NODE_H

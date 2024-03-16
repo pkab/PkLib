@@ -9,7 +9,7 @@ Node* NodeInit(void* data, uint8_t type, uint64_t size){
         fprintf(stderr, "Memory allocation failed.\n");
         exit(EXIT_FAILURE);
     }
-    newNode->height = 0;
+    newNode->priority = 0;
     size_t dataSize=0;
     switch (type) {
         case Int: dataSize = sizeof(int) * size; break;
@@ -98,5 +98,87 @@ void NodePrint(Node* node){
         default:
             printf("Pointer: %p, Value: %s, Type: %u, Size: %lu\n",node->data,(char*)node->data,node->type,node->size);
             break;
+    }
+}
+
+void NodePriorityPrint(Node* node){
+    switch (node->type) {
+        case I8:
+            printf("Pointer: %p, Value: %d, Priority: %d, Type: int8, Size: %lu\n",
+                   node->data,*(i8*)node->data,node->priority,node->size);
+            break;
+        case I16:
+            printf("Pointer: %p, Value: %d, Priority: %d, Type: int16, Size: %lu\n",
+                   node->data,*(i16*)node->data,node->priority,node->size);
+            break;
+        case Int:
+        case I32:
+            printf("Pointer: %p, Value: %d, Priority: %d, Type: int32, Size: %lu\n",
+                   node->data,*(i32*)node->data,node->priority,node->size);
+            break;
+        case I64:
+            printf("Pointer: %p, Value: %ld, Priority: %d, Type: int64, Size: %lu\n",
+                   node->data,*(i64*)node->data,node->priority,node->size);
+            break;
+        case Float:
+            printf("Pointer: %p, Value: %.2f, Priority: %d, Type: float, Size: %lu\n",
+                   node->data,*(float*)node->data,node->priority,node->size);
+            break;
+        case Double:
+            printf("Pointer: %p, Value: %.2f, Priority: %d, Type: double, Size: %lu\n",
+                   node->data,*(double*)node->data,node->priority,node->size);
+            break;
+        case Char:
+            printf("Pointer: %p, Value: %c, Priority: %d, Type: char, Size: %lu\n",
+                   node->data,*(char*)node->data,node->priority,node->size);
+            break;
+        case String:
+            printf("Pointer: %p, Value: %s, Priority: %d, Type: String, Size: %lu\n",
+                   node->data,(char*)node->data,node->priority,node->size);
+            break;
+        case U8:
+            printf("Pointer: %p, Value: %u, Priority: %d, Type: U8, Size: %lu\n",
+                   node->data,*(u8*)node->data,node->priority,node->size);
+            break;
+        case U16:
+            printf("Pointer: %p, Value: %u, Priority: %d, Type: U16, Size: %lu\n",
+                   node->data,*(u16*)node->data,node->priority,node->size);
+            break;
+        case U32:
+            printf("Pointer: %p, Value: %u, Priority: %d, Type: U32, Size: %lu\n",
+                   node->data,*(u32*)node->data,node->priority,node->size);
+            break;
+        case U64:
+            printf("Pointer: %p, Value: %lu, Priority: %d, Type: U64, Size: %lu\n",
+                   node->data,*(u64*)node->data,node->priority,node->size);
+            break;
+        case Other:
+            printf("Pointer: %p, Priority: %d, Type: Other, Size: %lu\n",
+                   node->data,node->priority,node->size);
+            break;
+        default:
+            printf("Pointer: %p, Value: %s, Priority: %d, Type: %u, Size: %lu\n",
+                   node->data,(char*)node->data,node->type,node->priority,node->size);
+            break;
+    }
+}
+
+u64 retSizeType(Node* node){
+    switch (node->type) {
+        case I8: return sizeof(i8);
+        case I16: return sizeof(i16);
+        case Int:
+        case I32: return sizeof(i32);
+        case I64: return sizeof(i64);
+        case Float: return sizeof(float);
+        case Double: return sizeof(double);
+        case Char: return sizeof(char);
+        case String: return node->size;
+        case U8: return sizeof(u8);
+        case U16: return sizeof(u16);
+        case U32: return sizeof(u32);
+        case U64: return sizeof(u64);
+        case Other: return node->size;
+        default: return node->size;
     }
 }
