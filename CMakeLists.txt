@@ -16,6 +16,7 @@ set(SOURCES
         Lib/System/ThreadPool/ThreadPool.c
         Lib/DataStructures/Lists/PriorityQueue/PriorityQueue.c
         Lib/DataStructures/Trees/Heap/MinHeap.c
+        Lib/DataStructures/Trees/Heap/MaxHeap.c
 )
 set(CMAKE_C_FLAGS_DEBUG "-O2 -march=native -pipe -ggdb -fsanitize=address")
 #set(ENV{LSAN_OPTIONS}verbosity=1:log_threads=1)
