@@ -17,8 +17,9 @@ set(SOURCES
         Lib/DataStructures/Lists/PriorityQueue/PriorityQueue.c
         Lib/DataStructures/Trees/Heap/MinHeap.c
 )
+set(CMAKE_C_FLAGS_DEBUG "-O2 -march=native -pipe -ggdb -fsanitize=address")
+#set(ENV{LSAN_OPTIONS}verbosity=1:log_threads=1)
 add_executable(${PROJECT_NAME} ${SOURCES})
-
 target_link_libraries(${PROJECT_NAME}
         pthread
         m

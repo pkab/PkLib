@@ -26,28 +26,22 @@ void swap(void *a, void *b, int size) {
 
     // Copy contents of 'a' to 'temp'
     memcpy(temp,a,size);
-//    // Copy contents of 'b' to 'a'
+    // Copy contents of 'b' to 'a'
     memcpy(a,b,size);
-//    for(int i=0;i<size;i++){
-//        *((char*)temp + i) = *((char*)a + i);
-//        *((char*)a + i) = *((char*)b + i);
-//        *((char*)b + i) = *((char*)temp + i);
-//    }
     // Copy contents of 'temp' to 'b'
     memcpy(b,temp,size);
-//    printf("%d ",*(int*)b);
     // Free the temporary memory
     free(temp);
 }
 
 void heapifyUp(MinHeap *heap, int index) {
     int parent = (index-1)/2;
-    printf("%d\n",parent);
-    while (index > 0 && MinHeapCompare(heap->arr+index, heap->arr+(parent),heap->type) > 0) {
-        printf("%d ",*(int*)(heap->arr+(parent)));
-        swap(heap->arr+index, heap->arr+(parent), retHeapType(heap));
+    int size = retHeapType(heap);
+    while (index > 0 && MinHeapCompare(heap->arr+(index*size), heap->arr+(parent*size),heap->type) > 0) {
+        swap(heap->arr+(index*size), heap->arr+(parent*size), size);
         index = parent;
     }
+    printf("%d ",*(int*)(heap->arr+(index*size)));
 }
 
 void MinHeapInsert(MinHeap* heap, void *data){
@@ -56,7 +50,7 @@ void MinHeapInsert(MinHeap* heap, void *data){
         return;
     }
     int size = retHeapType(heap);
-    memcpy(heap->arr+heap->size,data,size);
+    memcpy(heap->arr+heap->size*size,data,size);
     heapifyUp(heap, (int)heap->size);
     heap->size++;
 }
@@ -65,17 +59,17 @@ void heapifyDown(MinHeap *heap, int index) {
     int smallest = index;
     int leftChild = 2 * index + 1;
     int rightChild = 2 * index + 2;
-
-    if (leftChild < heap->size && MinHeapCompare(&heap->arr[leftChild],&heap->arr[smallest],heap->type) == 1) {
+    int size = retHeapType(heap);
+    if (leftChild < heap->size && MinHeapCompare(&heap->arr[leftChild*size],&heap->arr[smallest*size],heap->type) == 1) {
         smallest = leftChild;
     }
 
-    if (rightChild < heap->size && MinHeapCompare(&heap->arr[rightChild],&heap->arr[smallest],heap->type) == 1) {
+    if (rightChild < heap->size && MinHeapCompare(&heap->arr[rightChild*size],&heap->arr[smallest*size],heap->type) == 1) {
         smallest = rightChild;
     }
 
     if (smallest != index) {
-        swap(&heap->arr[index], &heap->arr[smallest], retHeapType(heap));
+        swap(&heap->arr[index*size], &heap->arr[smallest*size], retHeapType(heap));
         heapifyDown(heap, smallest);
     }
 }
@@ -87,7 +81,8 @@ void* extractMin(MinHeap *heap) {
     }
 
     void* root = &heap->arr[0];
-    memcpy(heap->arr,heap->arr+heap->size-1, retHeapType(heap));
+    int size = retHeapType(heap);
+    memcpy(heap->arr,heap->arr+(heap->size-1)*size, size);
     heap->size--;
     heapifyDown(heap, 0);
 
@@ -114,17 +109,18 @@ int retHeapType(MinHeap* heap){
 }
 void MinHeapPrint(MinHeap* heap){
     printf("MinHeap Array: ");
+    int size = retHeapType(heap);
     for(int i=0;i< heap->size;i++)
         switch (heap->type) {
             case I8:
-            case I16:
-            case I32: printf("%d ",*(int*)&heap->arr[i]); break;
-            case Int: printf("%d ",*(int*)&heap->arr[i]); break;
-            case I64: printf("%ld ",*(i64*)&heap->arr[i]); break;
+            case I16: printf("%d ",*(int*)&heap->arr[i*size]); break;
+            case I32: printf("%d ",*(int*)&heap->arr[i*size]); break;
+            case Int: printf("%d ",*(int*)&heap->arr[i*size]); break;
+            case I64: printf("%ld ",*(i64*)&heap->arr[i*size]); break;
             case U8:
             case U16:
-            case U32: printf("%u ",*(u32*)&heap->arr[i]); break;
-            case U64: printf("%lu ",*(u64*)&heap->arr[i]); break;
+            case U32: printf("%u ",*(u32*)&heap->arr[i*size]); break;
+            case U64: printf("%lu ",*(u64*)&heap->arr[i*size]); break;
         }
     printf("\n");
 }
