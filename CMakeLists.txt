@@ -18,7 +18,7 @@ set(SOURCES
         Lib/DataStructures/Trees/Heap/MinHeap.c
         Lib/DataStructures/Trees/Heap/MaxHeap.c
         Lib/DataStructures/Dictionary/Dictionary.c
-        Lib/DataStructures/Dictionary/Entry.c
+        Lib/DataStructures/Dictionary/Entry/Entry.c
         Lib/DataStructures/Graph/Graph.c
         Lib/DataStructures/Basic/Comparator/Comparator.c
 )

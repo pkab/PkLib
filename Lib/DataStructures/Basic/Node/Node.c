@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <DataStructures/Dictionary/Entry.h>
+#include "DataStructures/Dictionary/Entry/Entry.h"
 Node* NodeInit(void* data, uint8_t type, uint64_t size){
     Node* newNode = malloc(sizeof(Node));
     if(newNode == NULL){

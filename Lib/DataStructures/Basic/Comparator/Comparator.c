@@ -1,5 +1,5 @@
 #include "Comparator.h"
-#include <DataStructures/Dictionary/Entry.h>
+#include "DataStructures/Dictionary/Entry/Entry.h"
 #include <string.h>
 int compare(void* data1, void *data2, u8 type){
     switch (type) {

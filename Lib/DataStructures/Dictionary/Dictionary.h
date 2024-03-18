@@ -1,7 +1,7 @@
 #ifndef PKLIB_DICTIONARY_H
 #define PKLIB_DICTIONARY_H
 #include <DataStructures/Lists/LinkedList/LinkedList.h>
-#include <DataStructures/Dictionary/Entry.h>
+#include <DataStructures/Dictionary/Entry/Entry.h>
 
 typedef struct dict{
     LinkedList list;
