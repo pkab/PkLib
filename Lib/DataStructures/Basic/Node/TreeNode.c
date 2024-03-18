@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 TNode* TNodeInit(void* data, u8 type, u64 size){
     TNode* newNode = malloc(sizeof(TNode));
     if(newNode == NULL){
@@ -36,7 +35,7 @@ TNode* TNodeInit(void* data, u8 type, u64 size){
         free(newNode);
         exit(EXIT_FAILURE);
     }
-    memcpy(newNode->data,data,size);
+    memcpy(newNode->data,data,dataSize);
     newNode->type = type;
     newNode->size = size;
     newNode->left = NULL;
@@ -119,6 +118,9 @@ void TNodePrint(TNode* node){
             break;
         case U64:
             printf("Pointer: %p, Value: %lu, Type: U64, Size: %lu\n",node->data,*(u64*)node->data,node->size);
+            break;
+        case entry:
+            printf("Pointer: %p, Value: %s, Type: Entry, Size: %lu\n",node->data,(char*)node->data,node->size);
             break;
         case Other:
             printf("Pointer: %p, Type: Other, Size: %lu\n",node->data,node->size);

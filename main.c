@@ -1,14 +1,15 @@
-#include <DataStructures/Trees/Heap/MaxHeap.h>
+#include <DataStructures/Dictionary/Dictionary.h>
 #include <stdio.h>
 
 int main() {
-    MaxHeap heap;
-    MaxHeapInit(&heap,I32,3);
-    i32 arr[8] = {3,2,1,5,8,6,7,-2};
-    for(int i=0;i<8;i++){
-        MaxHeapInsert(&heap,&arr[i]);
-    }
-    MaxHeapPrint(&heap);
-    MaxHeapFree(&heap);
+    Dictionary dict;
+    Entry e;
+    int a=10;
+    char b[20] ="Hello World";
+    EntryInit(&e,&a,4,Int,b,20,String);
+    EntryPrint(&e);
+    DictInit(&dict);
+    DictInsert(&dict,&e);
+    PrintData(&dict,&e);
     return 0;
 }

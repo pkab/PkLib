@@ -39,11 +39,11 @@ void heapify(MaxHeap *heap, int index) {
     int leftChild = 2 * index + 1;
     int rightChild = 2 * index + 2;
     int size = retMaxHeapType(heap);
-    if (leftChild < heap->size && MaxHeapCompare(&heap->arr[leftChild*size],&heap->arr[largest*size],heap->type) == -1) {
+    if (leftChild < heap->size && compare(&heap->arr[leftChild * size], &heap->arr[largest * size], heap->type) == -1) {
         largest = leftChild;
     }
 
-    if (rightChild < heap->size && MaxHeapCompare(&heap->arr[rightChild*size],&heap->arr[largest*size],heap->type) == -1) {
+    if (rightChild < heap->size && compare(&heap->arr[rightChild * size], &heap->arr[largest * size], heap->type) == -1) {
         largest = rightChild;
     }
 
@@ -64,7 +64,7 @@ void MaxHeapInsert(MaxHeap* heap, void *data){
     heap->size++;
     // Fix the max-heap property
     int parent = (i-1)/2;
-    while (i > 0 && MaxHeapCompare(&heap->arr[i*size], &heap->arr[parent*size],heap->type)==-1 ) {
+    while (i > 0 && compare(&heap->arr[i * size], &heap->arr[parent * size], heap->type) == -1 ) {
         swapMax(&heap->arr[i*size], &heap->arr[parent*size], retMaxHeapType(heap));
         i = (i - 1) / 2;
     }
@@ -107,7 +107,7 @@ int retMaxHeapType(MaxHeap* heap){
     }
 }
 void MaxHeapPrint(MaxHeap* heap){
-    printf("MinHeap Array: ");
+    printf("MaxHeap Array: ");
     int size = retMaxHeapType(heap);
     for(int i=0;i< heap->size;i++)
         switch (heap->type) {
@@ -125,50 +125,4 @@ void MaxHeapPrint(MaxHeap* heap){
 }
 void MaxHeapFree(MaxHeap* heap){
     free(heap->arr);
-}
-
-int MaxHeapCompare(void* data1, void *data2, u8 type){
-    switch (type) {
-        case Char:
-        case I8:
-            if (*(i8*)data1 < *((i8*)data2)) return 1;
-            else if(*(i8*)data1 == *(i8*)data2) return 0;
-            else return -1;
-        case I16:
-            if (*(i16*)data1 < *((i16*)data2)) return 1;
-            else if(*(i16*)data1 == *(i16*)data2) return 0;
-            else return -1;
-        case Int:
-            if (*(int*)data1 < *((int*)data2)) return 1;
-            else if(*(int*)data1 == *(int*)data2) return 0;
-            else return -1;
-        case I32:
-            if (*(i32*)data1 < *((i32*)data2)) return 1;
-            else if(*(i32*)data1 == *(i32*)data2) return 0;
-            else return -1;
-        case I64:
-            if (*(i64*)data1 < *((i64*)data2)) return 1;
-            else if(*(i64*)data1 == *(i64*)data2) return 0;
-            else return -1;
-        case U8:
-            if(*(u8*)data1 < *(u8*)data2) return 1;
-            else if(*(u8*)data1 == *(u8*)data2) return 0;
-            else return -1;
-        case U16:
-            if(*(u16*)data1 < *(u16*)data2) return 1;
-            else if(*(u16*)data1 == *(u16*)data2) return 0;
-            else return -1;
-        case U32:
-            if(*(u32*)data1 < *(u32*)data2) return 1;
-            else if(*(u32*)data1 == *(u32*)data2) return 0;
-            else return -1;
-        case U64:
-            if(*(u64*)data1 < *(u64*)data2) return 1;
-            else if(*(u64*)data1 == *(u64*)data2) return 0;
-            else return -1;
-        case String:
-            if(strcmp(data1,data2)<0) return 1;
-            else if(strcmp(data1,data2)==0) return 0;
-            else return -1;
-    }
 }

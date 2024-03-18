@@ -15,7 +15,6 @@ void MaxHeapInit(MaxHeap* heap, u8 type, u64 height);
 void MaxHeapInsert(MaxHeap* heap, void *data);
 void MaxHeapPrint(MaxHeap* heap);
 void MaxHeapFree(MaxHeap* heap);
-int MaxHeapCompare(void* data1, void *data2, u8 type);
 int retMaxHeapType(MaxHeap* heap);
 void* extractMax(MaxHeap *heap);
 

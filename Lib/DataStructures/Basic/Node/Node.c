@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <DataStructures/Dictionary/Entry.h>
 Node* NodeInit(void* data, uint8_t type, uint64_t size){
     Node* newNode = malloc(sizeof(Node));
     if(newNode == NULL){
@@ -28,7 +28,7 @@ Node* NodeInit(void* data, uint8_t type, uint64_t size){
         case U64: dataSize = sizeof(u64) * size; break;
         case _complex: dataSize = sizeof(_Complex double) * size; break;
         case Other: dataSize = size; break;
-        default: break;
+        default: dataSize = size; break;
 
     }
 
@@ -39,7 +39,6 @@ Node* NodeInit(void* data, uint8_t type, uint64_t size){
         exit(EXIT_FAILURE);
     }
     memcpy(newNode->data, data, dataSize);
-
     newNode->type = type;
     newNode->size = size;
     newNode->next = NULL;
@@ -162,7 +161,6 @@ void NodePriorityPrint(Node* node){
             break;
     }
 }
-
 u64 retSizeType(Node* node){
     switch (node->type) {
         case I8: return sizeof(i8);

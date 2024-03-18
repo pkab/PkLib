@@ -17,6 +17,10 @@ set(SOURCES
         Lib/DataStructures/Lists/PriorityQueue/PriorityQueue.c
         Lib/DataStructures/Trees/Heap/MinHeap.c
         Lib/DataStructures/Trees/Heap/MaxHeap.c
+        Lib/DataStructures/Dictionary/Dictionary.c
+        Lib/DataStructures/Dictionary/Entry.c
+        Lib/DataStructures/Graph/Graph.c
+        Lib/DataStructures/Basic/Comparator/Comparator.c
 )
 set(CMAKE_C_FLAGS_DEBUG "-O2 -march=native -pipe -ggdb -fsanitize=address")
 #set(ENV{LSAN_OPTIONS}verbosity=1:log_threads=1)

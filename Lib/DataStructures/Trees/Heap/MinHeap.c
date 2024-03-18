@@ -37,7 +37,7 @@ void swap(void *a, void *b, int size) {
 void heapifyUp(MinHeap *heap, int index) {
     int parent = (index-1)/2;
     int size = retHeapType(heap);
-    while (index > 0 && MinHeapCompare(heap->arr+(index*size), heap->arr+(parent*size),heap->type) > 0) {
+    while (index > 0 && compare(heap->arr + (index * size), heap->arr + (parent * size), heap->type) > 0) {
         swap(heap->arr+(index*size), heap->arr+(parent*size), size);
         index = parent;
     }
@@ -60,11 +60,11 @@ void heapifyDown(MinHeap *heap, int index) {
     int leftChild = 2 * index + 1;
     int rightChild = 2 * index + 2;
     int size = retHeapType(heap);
-    if (leftChild < heap->size && MinHeapCompare(&heap->arr[leftChild*size],&heap->arr[smallest*size],heap->type) == 1) {
+    if (leftChild < heap->size && compare(&heap->arr[leftChild * size], &heap->arr[smallest * size], heap->type) == 1) {
         smallest = leftChild;
     }
 
-    if (rightChild < heap->size && MinHeapCompare(&heap->arr[rightChild*size],&heap->arr[smallest*size],heap->type) == 1) {
+    if (rightChild < heap->size && compare(&heap->arr[rightChild * size], &heap->arr[smallest * size], heap->type) == 1) {
         smallest = rightChild;
     }
 
@@ -126,50 +126,4 @@ void MinHeapPrint(MinHeap* heap){
 }
 void MinHeapFree(MinHeap* heap){
     free(heap->arr);
-}
-
-int MinHeapCompare(void* data1, void *data2, u8 type){
-    switch (type) {
-        case Char:
-        case I8:
-            if (*(i8*)data1 < *((i8*)data2)) return 1;
-            else if(*(i8*)data1 == *(i8*)data2) return 0;
-            else return -1;
-        case I16:
-            if (*(i16*)data1 < *((i16*)data2)) return 1;
-            else if(*(i16*)data1 == *(i16*)data2) return 0;
-            else return -1;
-        case Int:
-            if (*(int*)data1 < *((int*)data2)) return 1;
-            else if(*(int*)data1 == *(int*)data2) return 0;
-            else return -1;
-        case I32:
-            if (*(i32*)data1 < *((i32*)data2)) return 1;
-            else if(*(i32*)data1 == *(i32*)data2) return 0;
-            else return -1;
-        case I64:
-            if (*(i64*)data1 < *((i64*)data2)) return 1;
-            else if(*(i64*)data1 == *(i64*)data2) return 0;
-            else return -1;
-        case U8:
-            if(*(u8*)data1 < *(u8*)data2) return 1;
-            else if(*(u8*)data1 == *(u8*)data2) return 0;
-            else return -1;
-        case U16:
-            if(*(u16*)data1 < *(u16*)data2) return 1;
-            else if(*(u16*)data1 == *(u16*)data2) return 0;
-            else return -1;
-        case U32:
-            if(*(u32*)data1 < *(u32*)data2) return 1;
-            else if(*(u32*)data1 == *(u32*)data2) return 0;
-            else return -1;
-        case U64:
-            if(*(u64*)data1 < *(u64*)data2) return 1;
-            else if(*(u64*)data1 == *(u64*)data2) return 0;
-            else return -1;
-        case String:
-            if(strcmp(data1,data2)<0) return 1;
-            else if(strcmp(data1,data2)==0) return 0;
-            else return -1;
-    }
 }

@@ -6,7 +6,6 @@
 int AVLHeight(TNode* N);
 int AVLBalance(TNode* N);
 int max(int a,int b);
-int AVLCompare(void* data1, void* data2, u8 type);
 /* Internal Node Operations Functions */
 TNode* AVLRotateRight(TNode* y);
 TNode* AVLRotateLeft(TNode* x);
@@ -54,8 +53,7 @@ void AVLPrint(AVLTree* tree, u8 order){
 TNode* AVLSearch(AVLTree* tree, void* data){
     TNode *node = AVLSearchNode(tree->root, data, tree->type);
     if(node) TNodePrint(node);
-    else printf("Node not found");
-    printf("\n");
+    else printf("Node not found\n");
     return node;
 }
 
@@ -148,9 +146,9 @@ TNode* AVLRecusiveInsert(TNode* node, void* data, u8 type, u64 size){
     if (node == NULL)
         return TNodeInit(data, type, size);
 
-    if (AVLCompare(data,node->data,node->type)==1)
+    if (compare(data, node->data, node->type) == 1)
         node->left  = AVLRecusiveInsert(node->left, data, type, size);
-    else if (AVLCompare(data,node->data,node->type)==-1)
+    else if (compare(data, node->data, node->type) == -1)
         node->right = AVLRecusiveInsert(node->right, data, type, size);
     else /* Equal keys are not allowed in BST */
         return node;
@@ -169,22 +167,22 @@ TNode* AVLRecusiveInsert(TNode* node, void* data, u8 type, u64 size){
      */
 
     /* Left Left (LL) Case */
-    if (balance > 1 && (AVLCompare(data,node->left->data,node->type)==1))
+    if (balance > 1 && (compare(data, node->left->data, node->type) == 1))
         return AVLRotateRight(node);
 
     /* Right Right (RR) Case */
-    if (balance < -1 && (AVLCompare(data,node->right->data,node->type)==-1))
+    if (balance < -1 && (compare(data, node->right->data, node->type) == -1))
         return AVLRotateLeft(node);
 
     /* Left Right (LR) Case */
-    if (balance > 1 && (AVLCompare(data,node->left->data,node->type)==-1))
+    if (balance > 1 && (compare(data, node->left->data, node->type) == -1))
     {
         node->left =  AVLRotateLeft(node->left);
         return AVLRotateRight(node);
     }
 
     /* Right Left (RL) Case */
-    if (balance < -1 && (AVLCompare(data,node->right->data,node->type)==1))
+    if (balance < -1 && (compare(data, node->right->data, node->type) == 1))
     {
         node->right = AVLRotateRight(node->right);
         return AVLRotateLeft(node);
@@ -208,9 +206,9 @@ TNode* AVLRecursiveDelete(TNode* root, void* data, u8 type){
         return root;
     }
 
-    if (AVLCompare(data,root->data,type) ==1) {
+    if (compare(data, root->data, type) == 1) {
         root->left = AVLRecursiveDelete(root->left, data, type);
-    } else if (AVLCompare(data,root->data,type) ==-1) {
+    } else if (compare(data, root->data, type) == -1) {
         root->right = AVLRecursiveDelete(root->right, data, type);
     } else {
         /* Node with only one child or no child */
@@ -270,10 +268,10 @@ TNode* AVLRecursiveDelete(TNode* root, void* data, u8 type){
 
 /* Internal Search for Nodes */
 TNode* AVLSearchNode(TNode* root, void* data, u8 type){
-    if(root == NULL || AVLCompare(data,root->data,type) == 0)
+    if(root == NULL || compare(data, root->data, type) == 0)
         return root;
 
-    if(AVLCompare(data,root->data,type) == 1) return AVLSearchNode(root->left,data,type);
+    if(compare(data,root->data,type) == 1) return AVLSearchNode(root->left,data,type);
 
     return AVLSearchNode(root->right,data,type);
 }
@@ -307,50 +305,6 @@ int max(int a,int b){ return (a > b)? a : b; }
 int AVLBalance(TNode* N){
     if (N == NULL) return 0;
     return AVLHeight(N->left) - AVLHeight(N->right);
-}
-
-/* Comparison Function between Data types in AVL Tree */
-int AVLCompare(void* data1, void* data2, u8 type){
-    switch (type) {
-        case Char:
-        case I8:
-            if (*(i8*)data1 < *((i8*)data2)) return 1;
-            else if(*(i8*)data1 == *(i8*)data2) return 0;
-            else return -1;
-        case I16:
-            if (*(i16*)data1 < *((i16*)data2)) return 1;
-            else if(*(i16*)data1 == *(i16*)data2) return 0;
-            else return -1;
-        case Int:
-        case I32:
-            if (*(i32*)data1 < *((i32*)data2)) return 1;
-            else if(*(i32*)data1 == *(i32*)data2) return 0;
-            else return -1;
-        case I64:
-            if (*(i64*)data1 < *((i64*)data2)) return 1;
-            else if(*(i64*)data1 == *(i64*)data2) return 0;
-            else return -1;
-        case U8:
-            if(*(u8*)data1 < *(u8*)data2) return 1;
-            else if(*(u8*)data1 == *(u8*)data2) return 0;
-            else return -1;
-        case U16:
-            if(*(u16*)data1 < *(u16*)data2) return 1;
-            else if(*(u16*)data1 == *(u16*)data2) return 0;
-            else return -1;
-        case U32:
-            if(*(u32*)data1 < *(u32*)data2) return 1;
-            else if(*(u32*)data1 == *(u32*)data2) return 0;
-            else return -1;
-        case U64:
-            if(*(u64*)data1 < *(u64*)data2) return 1;
-            else if(*(u64*)data1 == *(u64*)data2) return 0;
-            else return -1;
-        case String:
-            if(strcmp(data1,data2)<0) return 1;
-            else if(strcmp(data1,data2)==0) return 0;
-            else return -1;
-    }
 }
 /*
  * --------------------- CORE AVL Tree Internal Comparison and Calculation Functions END ----------------------- *
