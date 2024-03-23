@@ -1,0 +1,5 @@
+This is a sample text file.
+It contains multiple lines of text.
+Each line demonstrates a different feature.
+You can use this file to test reading operations.
+hello.

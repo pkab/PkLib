@@ -21,6 +21,10 @@ set(SOURCES
         Lib/DataStructures/Dictionary/Entry/Entry.c
         Lib/DataStructures/Graph/Graph.c
         Lib/DataStructures/Basic/Comparator/Comparator.c
+        Lib/System/Files/Files.c
+        Lib/System/Files/RawFiles/RawFile.c
+        Lib/System/Files/BinaryFiles/BinFiles.c
+        Lib/System/Files/BinaryFiles/BinFiles.h
 )
 set(CMAKE_C_FLAGS_DEBUG "-O2 -march=native -pipe -ggdb -fsanitize=address")
 #set(ENV{LSAN_OPTIONS}verbosity=1:log_threads=1)
